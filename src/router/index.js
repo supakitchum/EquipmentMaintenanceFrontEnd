@@ -57,6 +57,8 @@ const Register = () => import('@/views/pages/Register')
 // Users
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
+const Profile = () => import('@/views/users/Profile')
+
 
 Vue.use(Router)
 
@@ -118,10 +120,10 @@ export default new Router({
               component: Users,
             },
             {
-              path: ':id',
-              meta: { label: 'User Details'},
+              path: 'profile',
+              meta: { label: 'Profile'},
               name: 'User',
-              component: User,
+              component: Profile,
             },
           ]
         },
