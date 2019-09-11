@@ -38,6 +38,7 @@
     "vue-router": "^3.0.6"
   },
   "devDependencies": {
+    "@mdi/js": "^4.4.95",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-e2e-nightwatch": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",

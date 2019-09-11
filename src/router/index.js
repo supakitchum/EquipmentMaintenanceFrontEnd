@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
 
@@ -58,6 +57,12 @@ const Register = () => import('@/views/pages/Register')
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
 const Profile = () => import('@/views/users/Profile')
+const usersHistory = () => import('@/views/users/History')
+const Repair = () => import('@/views/users/Repairs')
+const AddRepair = () => import('@/views/users/AddRepair')
+
+
+
 
 
 Vue.use(Router)
@@ -109,6 +114,32 @@ export default new Router({
               meta: { label: 'Profile'},
               name: 'User',
               component: Profile,
+            },
+            {
+              path: 'history',
+              meta: { label: 'History'},
+              name: 'History',
+              component: usersHistory,
+            },            
+            {
+              path: 'repair',
+              meta: { label: 'Repair'},
+              name: 'Repair',
+              component: {
+                render (c) { return c('router-view') }
+              },
+              children: [
+                {
+                  path: '',
+                  component: Repair,
+                },
+                {
+                  path: 'add',
+                  meta: { label: 'Add'},
+                  name: 'Add',
+                  component: AddRepair
+                }
+              ]
             },
           ]
         },

@@ -1,21 +1,5 @@
 <template>
 
-  <!-- <div class="row">
-    <div style="float: left;width: 40%; text-align: center;">
-      <h2 style="text-align: left">ข้อมูลส่วนตัว</h2>
-        <img src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" style="width: 200px; margin:40px; border-radius: 100%"> <br>
-        <input type="file" id="myFile">
-    </div>
-    <div style="float: left;width: 60%;">
-   
-      <b-col sm="3">
-        <label :for="`type-${type}`">ชื่อ - สกุล</label>
-      </b-col>
-      <b-col sm="9">
-        <b-form-input :id="`type-${type}`" :type="type"></b-form-input>
-      </b-col>
-    </div>
-  </div> -->
   <b-card>
   <b-row>
     
@@ -55,8 +39,8 @@
         </b-form-group>
 
         <div align="center">
-          <b-button type="submit" size="sm" variant="primary" style="margin:5px"><i class="fa fa-dot-circle-o"></i> บันทึก</b-button>
-          <b-button type="cancel" size="sm" variant="danger" style="margin:5px"><i class="fa fa-ban"></i> ยกเลิก</b-button>
+          <b-button type="submit" size="dg" variant="success" style="margin:5px"><i class="fa fa-dot-circle-o"></i> บันทึก</b-button>
+          <b-button type="cancel" size="dg" variant="danger" style="margin:5px"><i class="fa fa-ban"></i> ยกเลิก</b-button>
         </div>
       </b-col>
   </b-row>
