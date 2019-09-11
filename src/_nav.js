@@ -19,8 +19,8 @@ export default {
       }
     },
     {
-      name: 'Colors',
-      url: '/theme/colors',
+      name: 'History to Fix',
+      url: '/history',
       icon: 'icon-drop'
     },
     {
