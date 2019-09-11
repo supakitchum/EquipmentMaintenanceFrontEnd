@@ -119,6 +119,13 @@ import cTable from "./base/Table.vue";
 import { Callout } from "@coreui/vue";
 
 export default {
+  mounted() {
+    const token = localStorage.usertoken;
+    console.log(token);
+    if (!token) {
+      this.$router.push("/login");
+    }
+  },
   name: "dashboard",
   components: {
     Callout,
@@ -128,10 +135,9 @@ export default {
     CardBarChartExample,
     MainChartExample,
     SocialBoxChartExample,
-    CalloutChartExample
+    CalloutChartExample,
+    cTable
   },
-  name: "tables",
-  components: { cTable },
   data: () => {
     return {
       items: someData,

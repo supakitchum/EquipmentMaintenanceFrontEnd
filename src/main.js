@@ -8,18 +8,20 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-// todo
-// cssVars()
-
+Vue.use(VueAxios, axios)
+    // todo
+    // cssVars()
 Vue.use(BootstrapVue)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: {
-    App
-  }
+    el: '#app',
+    router,
+    template: '<App/>',
+    components: {
+        App
+    }
 })
