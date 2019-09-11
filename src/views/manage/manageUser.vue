@@ -19,10 +19,28 @@ import cTable from "../base/Table.vue";
 export default {
   name: "manageUser",
   components: { cTable },
+  mounted() {
+    this.token = localStorage.usertoken;
+    this.base_api = localStorage.getItem('base_api')
+    this.getData()
+  },
+  methods : {
+    getData() {
+      this.$http.get(this.base_api + '/admin/users', {
+        headers: {
+          'Authorization': `Bearer ${this.token}`,
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => {
+        this.datas = res.data.results.data[0]
+        console.log(this.datas)
+      })
+    }
+  },
   data: () => {
     return {
-      items: someData,
-      itemsArray: someData(),
+      items: someData(),
+      itemsArray: someData,
       fields: [
         { key: "username", label: "ลำดับ" },
         { key: "role", label: "ชื่อรายการ" },

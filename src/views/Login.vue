@@ -66,19 +66,9 @@ export default {
   name: "Login",
   methods: {
     Login: async function() {
-      // var bodyFormData = new FormData();
-      // bodyFormData.aopend({ email: "test@test.com", password: "1234" });
-      // var email = "test@test.com";
-      // var password = "1234";
-      // const { email, password } = this;
-      // myLoginRoutine().then(() => {
-      //   this.$router.push("/");
-      // });
-      // var username = document.getElementById("email").value;
-
       await this.axios({
         method: "post",
-        url: "http://192.168.20.147:3000/api/v1/login",
+        url: "http://localhost:3000/api/v1/login",
         data: { email: email.value, password: password.value },
         config: { headers: { "Content-Type": "multipart/form-data" } }
       })
