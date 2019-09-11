@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
 
@@ -8,6 +9,8 @@ const Dashboard = () => import('@/views/Dashboard')
 
 const History = () => import('@/views/historytoFix/historytechnician')
 const Typography = () => import('@/views/theme/Typography')
+const ManageUser = () =>
+    import ('@/views/manage/manageUser')
 
 const Charts = () => import('@/views/Charts')
 const Widgets = () => import('@/views/Widgets')
@@ -73,6 +76,11 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
       path: '/',
       redirect: '/dashboard',
       name: 'Home',
@@ -86,8 +94,12 @@ export default new Router({
           path: 'history',
           name: 'History',
           component: History
-        }
-        ,
+        },
+        {
+          path: 'manageuser',
+          name: 'ManageUser',
+          component: ManageUser
+        },
         {
           path: 'charts',
           name: 'Charts',
@@ -120,7 +132,7 @@ export default new Router({
               meta: { label: 'History'},
               name: 'History',
               component: usersHistory,
-            },            
+            },
             {
               path: 'repair',
               meta: { label: 'Repair'},

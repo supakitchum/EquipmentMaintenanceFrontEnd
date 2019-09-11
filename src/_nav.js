@@ -19,6 +19,21 @@ export default {
       }
     },
     {
+      name: 'จัดการผู้ใช้',
+      url: '/manageuser',
+      icon: 'icon-pencil'
+    },
+    {
+      name: 'จัดการช่างซ่อม',
+      url: '/theme/typography',
+      icon: 'icon-pencil'
+    },
+    {
+      name: 'รายงาน',
+      url: '/theme/typography',
+      icon: 'icon-calculator'
+    },
+    {
       name: 'History to Fix',
       url: '/history',
       icon: 'icon-drop'
