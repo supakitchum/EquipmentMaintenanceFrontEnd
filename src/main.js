@@ -11,6 +11,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueAlertify from 'vue-alertify';
+localStorage.base_api = 'http://192.168.20.147:3000/api/v1'
 
 Vue.use(VueAlertify);
 

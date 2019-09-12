@@ -7,6 +7,7 @@ export default {
   name: 'app',
   mounted(){
     this.token = localStorage.usertoken;
+    this.base_api = localStorage.setItem('base_api','http://192.168.20.147:3000/api/v1')
     if (!this.token) {
       this.$router.push("/login");
     }

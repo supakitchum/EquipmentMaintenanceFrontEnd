@@ -59,11 +59,13 @@
       }
     },
     mounted() {
+      this.base_api = localStorage.base_api
+      this.token = localStorage.usertoken
       this.getData()
     },
     methods: {
       getData() {
-        this.$http.get(this.baseApi + '/admin/users/test@test.com', {
+        this.$http.get(this.base_api + '/admin/users/test@test.com', {
           headers: {
             'Authorization': `Bearer ${this.token}`,
             'Content-Type': 'application/json'
@@ -73,7 +75,7 @@
         })
       },
       submitData() {
-        let api = 'http://localhost:3000/api/v1/admin/users'
+        let api = this.base_api+'/admin/users'
         this.$http.put(api,{
           email: 'test@test.com',
           firstname: fname.value,
