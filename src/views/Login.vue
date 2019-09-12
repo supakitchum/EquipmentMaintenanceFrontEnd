@@ -76,7 +76,6 @@ export default {
         .then(resp => {
           if (resp.status === 200){
             const token = resp.data.results.token;
-            console.log(token);
             localStorage.setItem("usertoken", token); // store the token in localstorage
             if (token != null) {
               this.$router.push("/");
