@@ -33,15 +33,21 @@ export default {
             icon: 'icon-calculator'
         },
         {
-            name: 'History to Fix',
-            url: '/history',
-            icon: 'icon-drop'
-        },
+            name: 'โปรไฟล์',
+            url: '/profiles',
+            icon: 'icon-people'
+          },
         {
-            name: 'Typography',
-            url: '/theme/typography',
+            name: 'ประวัติการซ่อม',
+            url: '/history',
+            icon: 'icon-calendar'
+          },
+          
+          {
+            name: 'อัพเดทสถานะการซ่อม',
+            url: '/updatefix',
             icon: 'icon-pencil'
-        },
+          },
         {
             title: true,
             name: 'Components',

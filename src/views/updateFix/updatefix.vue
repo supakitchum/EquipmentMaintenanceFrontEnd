@@ -26,7 +26,7 @@ export default {
   },
   methods : {
     getData() {
-        this.$http.get(this.base_api + '/technician/repair/history', {
+        this.$http.get(this.base_api + '/technician/repair', {
           headers: {
             'Authorization': `Bearer ${this.token}`,
             'Content-Type': 'application/json'

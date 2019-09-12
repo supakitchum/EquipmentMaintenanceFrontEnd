@@ -11,10 +11,10 @@ const Dashboard = () =>
 
 const History = () =>
     import ('@/views/historytoFix/historytechnician')
-const Typography = () =>
-    import ('@/views/theme/Typography')
-const ManageUser = () =>
-    import ('@/views/manage/manageUser')
+const Profiles = () => import('@/views/profiles/profile')
+const Update = () => import('@/views/updateFix/updatefix')
+const Updatestatus = () => import('@/views/updateFix/updatestatus')
+    
 
 const ManageTech = () =>
     import ('@/views/manage/manageTechnician')
@@ -108,6 +108,8 @@ const Repair = () =>
     import ('@/views/users/Repairs')
 const AddRepair = () =>
     import ('@/views/users/AddRepair')
+const ManageUser = () =>
+    import ('@/views/manage/manageUser')
 
 
 
@@ -149,6 +151,23 @@ export default new Router({
                   name: 'ManageTech',
                   component: ManageTech
               },
+              {
+                path: 'profiles',
+                name: 'Profiles',
+                component: Profiles
+              }
+              ,
+              {
+                path: 'updatefix',
+                name: 'Update',
+                component: Update
+              },
+              {
+                path: 'updatestatus',
+                name: 'Updatestatus',
+                component: Updatestatus
+              }
+              ,
                 {
                     path: 'charts',
                     name: 'Charts',
