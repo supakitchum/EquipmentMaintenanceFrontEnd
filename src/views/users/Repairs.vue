@@ -62,8 +62,6 @@
           }
         }).then((res) => {
           this.datas = res.data.results.data
-          console.log(this.datas)
-          
 
           this.datas.forEach((value, index) => {
             this.datas[index].index = index + 1
