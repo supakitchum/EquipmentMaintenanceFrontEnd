@@ -29,15 +29,26 @@ export default {
             icon: 'icon-calculator'
         },
         {
-            name: 'History to Fix',
-            url: '/history',
-            icon: 'icon-drop'
-        },        
+          name: 'โปรไฟล์',
+          url: '/profiles',
+          icon: 'icon-people'
+        },
+        {
+          name: 'ประวัติการซ่อม',
+          url: '/history',
+          icon: 'icon-calendar'
+        },
+
+        {
+          name: 'อัพเดทสถานะการซ่อม',
+          url: '/updatefix',
+          icon: 'icon-pencil'
+        },
         {
             name: 'รายการแจ้งซ่อม',
             url: '/users/repair',
             icon: 'icon-note'
-        },        
+        },
         {
             name: 'ประวัติการแจ้งซ่อม',
             url: '/users/history',

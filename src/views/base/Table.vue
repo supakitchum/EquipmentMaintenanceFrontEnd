@@ -2,6 +2,9 @@
   <b-card>
     <div slot="header" v-html="caption"></div>
     <b-table :dark="dark" :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" responsive="sm" :items="items" :fields="captions" :current-page="currentPage" :per-page="perPage">
+      <template slot="username" slot-scope="name">
+        <a :href="`/#/updatestatus`">{{ name.item.username}}</a>
+      </template>
       <template slot="status" slot-scope="data">
         <b-badge :variant="getBadge(data.item.status)">{{data.item.status}}</b-badge>
       </template>
