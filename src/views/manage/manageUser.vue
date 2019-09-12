@@ -2,14 +2,8 @@
   <div class="animated fadeIn">
     <b-row>
       <b-col lg="12">
-<<<<<<< HEAD
-
-        <c-table
-          :table-data="datas"
-=======
         <c-table
           :table-data="items"
->>>>>>> origin/feature/technician
           :fields="fields"
           caption="<i class='fa fa-align-justify'></i>จัดการผู้แจ้งซ่อม"
         ></c-table>
