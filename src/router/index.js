@@ -14,7 +14,7 @@ const History = () =>
 const TechProfile = () => import('@/views/profiles/profile')
 const Update = () => import('@/views/updateFix/updatefix')
 const Updatestatus = () => import('@/views/updateFix/updatestatus')
-    
+
 
 const ManageTech = () =>
     import ('@/views/manage/manageTechnician')
@@ -114,6 +114,9 @@ const ManageUser = () =>
 
 
 
+const Report = () => import('@/views/admin/reports')
+
+
 
 Vue.use(Router)
 
@@ -138,7 +141,7 @@ export default new Router({
                     path: 'dashboard',
                     name: 'Dashboard',
                     component: Dashboard
-                }, 
+                },
                 {
                     path: 'history',
                     name: 'History',
@@ -153,6 +156,11 @@ export default new Router({
                     path: 'ManageTechnician',
                     name: 'ManageTech',
                     component: ManageTech
+                },
+                {
+                  path: '/report',
+                  name: 'Report',
+                  component: Report
                 },
                 {
                     path: 'techprofile',

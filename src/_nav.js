@@ -29,6 +29,11 @@ export default {
             icon: 'icon-calculator'
         },
         {
+        name: 'Report',
+        url: '/report',
+        icon: 'icon-pencil'
+        },
+        {
           name: 'โปรไฟล์',
           url: '/profiles',
           icon: 'icon-people'

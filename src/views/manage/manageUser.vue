@@ -40,9 +40,9 @@ export default {
   data: () => {
     return {
       items: someData(),
+      datas: [],
       itemsArray: someData,
       fields: [
-        { key: "username", label: "ลำดับ" },
         { key: "role", label: "ชื่อรายการ" },
         { key: "username", label: "ผู้แจ้ง", sortable: true },
         { key: "registered", label: "วันที่แจ้ง" },
