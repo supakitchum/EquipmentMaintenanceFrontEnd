@@ -86,7 +86,6 @@ export default {
           }
         })
         .catch(err => {
-          this.$alertify.error('ไม่พบข้อมูลของบัญชี');
           localStorage.removeItem("usertoken"); // if the request fails, remove any possible user token if possible
           reject(err);
         });

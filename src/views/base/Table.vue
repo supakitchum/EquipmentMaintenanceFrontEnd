@@ -78,7 +78,10 @@ export default {
       return status === 'Active' ? 'success'
         : status === 'Inactive' ? 'secondary'
           : status === 'Pending' ? 'warning'
-            : status === 'Banned' ? 'danger' : 'primary'
+            : status === 'กำลังดำเนินการ' ? 'warning'
+                : status === 'รอดำเนินการ' ? 'secondary'
+                    : status === 'เสร็จสิ้น' ? 'success'
+                      : status === 'Banned' ? 'danger' : 'primary'
     },
     getRowCount: function () {
       return this.items.length
