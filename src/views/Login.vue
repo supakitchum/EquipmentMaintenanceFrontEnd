@@ -62,23 +62,24 @@ import { async } from "q";
 export default {
   mounted() {
     localStorage.removeItem("usertoken");
+    this.base_api = localStorage.base_api
   },
   name: "Login",
   methods: {
     Login: async function() {
       await this.axios({
         method: "post",
-        url: "http://localhost:3000/api/v1/login",
+        url: this.base_api+"/login",
         data: { email: email.value, password: password.value },
-        config: { headers: { "Content-Type": "multipart/form-data" } }
+        config: { headers: { "Content-Type": "application/json" } }
       })
         .then(resp => {
           const token = resp.data.results.token;
           console.log(token);
           localStorage.setItem("usertoken", token); // store the token in localstorage
-          if (token != null) {
-            this.$router.push("/");
-          }
+          // if (token != null) {
+          //   this.$router.push("/");
+          // }
         })
         .catch(err => {
           localStorage.removeItem("usertoken"); // if the request fails, remove any possible user token if possible
