@@ -77,9 +77,9 @@ export default {
           const token = resp.data.results.token;
           console.log(token);
           localStorage.setItem("usertoken", token); // store the token in localstorage
-          // if (token != null) {
-          //   this.$router.push("/");
-          // }
+          if (token != null) {
+            this.$router.push("/");
+          }
         })
         .catch(err => {
           localStorage.removeItem("usertoken"); // if the request fails, remove any possible user token if possible
