@@ -35,7 +35,7 @@ export default {
         {
           name: 'Report',
           url: '/report',
-          icon: 'icon-pencil'
+          icon: 'icon-calculator'
         },
         {
             name: 'History to Fix',
