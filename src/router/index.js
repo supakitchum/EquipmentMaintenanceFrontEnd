@@ -57,6 +57,7 @@ const Register = () => import('@/views/pages/Register')
 // Users
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
+const Report = () => import('@/views/admin/reports')
 
 Vue.use(Router)
 
@@ -95,6 +96,11 @@ export default new Router({
               component: Typography
             }
           ]
+        },
+        {
+          path: '/report',
+          name: 'Report',
+          component: Report
         },
         {
           path: 'charts',

@@ -29,6 +29,11 @@ export default {
       icon: 'icon-pencil'
     },
     {
+      name: 'Report',
+      url: '/report',
+      icon: 'icon-pencil'
+    },
+    {
       title: true,
       name: 'Components',
       class: '',
