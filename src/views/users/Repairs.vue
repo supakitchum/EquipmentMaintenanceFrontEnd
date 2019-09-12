@@ -5,7 +5,7 @@
         <h2>รายการแจ้งซ่อม</h2>
         
         <div align="right" style="padding:10px">
-           <b-button :href="`/#/users/repair/add`" block variant="outline-success" style="width:200px;">เพิ่มรายการแจ้งซ่อม</b-button>
+           <b-button @click="$router.push('/users/repair/add')" block variant="outline-success" style="width:200px;">เพิ่มรายการแจ้งซ่อม</b-button>
         </div>
         <div class="animated fadeIn">
           <b-row>
@@ -41,7 +41,7 @@
         fields: [
           {key: 'title', label: 'ชื่อรายการ'},
           {key: 'detail', label: 'รายละเอียด'},
-          {key: 'create_date', label: 'วันที่แจ้ง'},
+          {key: 'create_date', label: 'วันที่แจ้ง', sortable: true},
           {key: 'status', label: 'สถานะ', sortable: true}
         ],
       }

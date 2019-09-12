@@ -84,6 +84,7 @@
         }).then((res) => {
           if (res.status === 201){
             this.$alertify.success('เพิ่มรายการแจ้งซ่อมเรียบร้อย');
+            this.$router.go(-1)
           }
         })
       }
