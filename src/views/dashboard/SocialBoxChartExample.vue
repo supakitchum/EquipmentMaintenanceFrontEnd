@@ -1,6 +1,6 @@
 <script>
-import { Line } from 'vue-chartjs'
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips'
+import { Line } from "vue-chartjs";
+import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
 
 export default {
   extends: Line,
@@ -11,48 +11,63 @@ export default {
     },
     height: {
       type: String,
-      default: '100'
+      default: "100"
     }
   },
-  mounted () {
-    this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          backgroundColor: 'rgba(255,255,255,.1)',
-          borderColor: 'rgba(255,255,255,.55)',
-          pointHoverBackgroundColor: '#fff',
-          borderWidth: 2,
-          data: this.data
-        }
-      ]
-    }, {
-      tooltips: {
-        enabled: false,
-        custom: CustomTooltips
+  mounted() {
+    this.renderChart(
+      {
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July"
+        ],
+        datasets: [
+          {
+            backgroundColor: "rgba(255,255,255,.1)",
+            borderColor: "rgba(255,255,255,.55)",
+            pointHoverBackgroundColor: "#fff",
+            borderWidth: 2,
+            data: this.data
+          }
+        ]
       },
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [{
+      {
+        tooltips: {
+          enabled: false,
+          custom: CustomTooltips
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
           display: false
-        }],
-        yAxes: [{
-          display: false
-        }]
-      },
-      elements: {
-        point: {
-          radius: 0,
-          hitRadius: 10,
-          hoverRadius: 4,
-          hoverBorderWidth: 3
+        },
+        scales: {
+          xAxes: [
+            {
+              display: false
+            }
+          ],
+          yAxes: [
+            {
+              display: false
+            }
+          ]
+        },
+        elements: {
+          point: {
+            radius: 0,
+            hitRadius: 10,
+            hoverRadius: 4,
+            hoverBorderWidth: 3
+          }
         }
       }
-    })
+    );
   }
-}
+};
 </script>

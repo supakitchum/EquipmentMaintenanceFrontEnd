@@ -1,69 +1,11 @@
 <template>
   <div class="animated fadeIn">
     <b-row>
-      <b-col lg="6">
+      <b-col lg="12">
         <c-table
           :table-data="items"
           :fields="fields"
-          caption="<i class='fa fa-align-justify'></i> Simple Table"
-        ></c-table>
-      </b-col>
-
-      <b-col lg="6">
-        <c-table
-          :table-data="items"
-          striped
-          caption="<i class='fa fa-align-justify'></i> Striped Table"
-        ></c-table>
-      </b-col>
-    </b-row>
-    <!--/.row-->
-
-    <b-row>
-      <b-col lg="6">
-        <c-table
-          :table-data="items"
-          small
-          caption="<i class='fa fa-align-justify'></i> Condensed Table"
-        ></c-table>
-      </b-col>
-
-      <b-col lg="6">
-        <c-table
-          :table-data="items"
-          fixed
-          bordered
-          caption="<i class='fa fa-align-justify'></i> Bordered Table"
-        ></c-table>
-      </b-col>
-    </b-row>
-
-    <b-row>
-      <b-col sm="12">
-        <c-table
-          :table-data="itemsArray"
-          :per-page="10"
-          hover
-          striped
-          bordered
-          small
-          fixed
-          caption="<i class='fa fa-align-justify'></i> Combined All Table"
-        ></c-table>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col sm="12">
-        <c-table
-          dark
-          :table-data="itemsArray"
-          :per-page="10"
-          hover
-          striped
-          bordered
-          small
-          fixed
-          caption="<i class='fa fa-align-justify'></i> Dark Table"
+          caption="<i class='fa fa-align-justify'></i>จัดการช่าง"
         ></c-table>
       </b-col>
     </b-row>
@@ -72,8 +14,51 @@
 
 <script>
 import { shuffleArray } from "@/shared/utils";
-import cTable from "./Table.vue";
+import cTable from "../base/Table.vue";
 
+export default {
+  mounted() {
+    this.token = localStorage.usertoken;
+    // console.log(token);
+    if (!this.token) {
+      this.$router.push("/login");
+    }
+
+    this.getData();
+  },
+  name: "manageTechnician",
+  components: { cTable },
+  methods: {
+    getData: async function() {
+      console.log(localStorage.usertoken);
+      await this.axios({
+        method: "get",
+        url: "http://192.168.20.147:3000/api/v1/admin/users",
+        config: { headers: { "token": this.token } }
+      })
+        .then(resp => {
+          // this.datas = resp;
+          console.log(resp);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    }
+  },
+  data: () => {
+    return {
+      items: someData,
+      itemsArray: someData(),
+      fields: [
+        { key: "username", label: "ลำดับ" },
+        { key: "role", label: "ชื่อรายการ" },
+        { key: "username", label: "ผู้แจ้ง", sortable: true },
+        { key: "registered", label: "วันที่แจ้ง" },
+        { key: "status", label: "สถานะ", sortable: true }
+      ]
+    };
+  }
+};
 const someData = () =>
   shuffleArray([
     {
@@ -230,21 +215,5 @@ const someData = () =>
       status: "Pending"
     }
   ]);
-
-export default {
-  name: "tables",
-  components: { cTable },
-  data: () => {
-    return {
-      items: someData,
-      itemsArray: someData(),
-      fields: [
-        { key: "username", label: "User", sortable: true },
-        { key: "registered" },
-        { key: "role" },
-        { key: "status", sortable: true }
-      ]
-    };
-  }
-};
 </script>
+

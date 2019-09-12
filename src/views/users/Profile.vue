@@ -1,67 +1,98 @@
 <template>
 
-  <!-- <div class="row">
-    <div style="float: left;width: 40%; text-align: center;">
-      <h2 style="text-align: left">ข้อมูลส่วนตัว</h2>
-        <img src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" style="width: 200px; margin:40px; border-radius: 100%"> <br>
-        <input type="file" id="myFile">
-    </div>
-    <div style="float: left;width: 60%;">
-   
-      <b-col sm="3">
-        <label :for="`type-${type}`">ชื่อ - สกุล</label>
-      </b-col>
-      <b-col sm="9">
-        <b-form-input :id="`type-${type}`" :type="type"></b-form-input>
-      </b-col>
-    </div>
-  </div> -->
-  <b-card>
-  <b-row>
-    
-      <b-col sm="5">
-        <h2>ข้อมูลส่วนตัว</h2>
-        <div align="center" style="padding:10%">
-          <img src="https://avatarfiles.alphacoders.com/107/107749.png" style="border-radius: 100%; width:300px; height:auto">
-            <b-form-file id="file-small" size="sm" style="margin:15px"></b-form-file>
+    <b-card>
+        <b-row>
 
-        </div>
+            <b-col sm="5">
+                <h2>ข้อมูลส่วนตัว</h2>
+                <div align="center" style="padding:10%">
+                    <img src="https://avatarfiles.alphacoders.com/107/107749.png"
+                         style="border-radius: 100%; width:300px; height:auto">
+                    <b-form-file id="file-small" size="sm" style="margin:15px"></b-form-file>
 
-      </b-col>
-      <b-col sm="7" style="margin-top:50px;">
-        <b-form-group>
-            <label for="name">ชื่อ - สกุล</label>
-            <b-form-input type="text" id="name"></b-form-input>
-        </b-form-group>
+                </div>
 
-        <b-form-group>
-            <label for="name">ชื่อผู้ใช้งาน</label>
-            <b-form-input type="text" id="name"></b-form-input>
-        </b-form-group>
-        
-        <b-form-group>
-            <label for="name">ตำแหน่ง</label>
-            <b-form-input type="text" id="name"></b-form-input>
-        </b-form-group>
-        
-        <b-form-group>
-            <label for="name">ที่อยู่</label>
-            <b-form-textarea type="text" id="name"></b-form-textarea>
-        </b-form-group>
-        
-        <b-form-group>
-            <label for="name">โทร</label>
-            <b-form-input type="text" id="name"></b-form-input>
-        </b-form-group>
-
-        <div align="center">
-          <b-button type="submit" size="sm" variant="primary" style="margin:5px"><i class="fa fa-dot-circle-o"></i> บันทึก</b-button>
-          <b-button type="cancel" size="sm" variant="danger" style="margin:5px"><i class="fa fa-ban"></i> ยกเลิก</b-button>
-        </div>
-      </b-col>
-  </b-row>
-          </b-card>
+            </b-col>
+            <b-col sm="7" style="margin-top:50px;">
+                <b-form @submit.prevent="submitData">
+                    <b-row>
+                        <b-col md="12" class="mb-2">
+                            <label for="name">อีเมลล์</label>
+                            <b-form-input disabled type="text" name="email" id="email"
+                                          v-bind:value="(datas.email !== undefined) ? datas.email:''"></b-form-input>
+                        </b-col>
+                        <b-col md="6" class="mb-2">
+                            <label for="name">ชื่อ</label>
+                            <b-form-input type="text" name="fname" id="fname"
+                                          v-bind:value="(datas.firstname !== undefined) ? datas.firstname:''"></b-form-input>
+                        </b-col>
+                        <b-col md="6" class="mb-2">
+                            <label for="name">นามสกุล</label>
+                            <b-form-input type="text" name="lname" id="lname"
+                                          v-bind:value="(datas.lastname !== undefined) ? datas.lastname:''"></b-form-input>
+                        </b-col>
+                        <b-col md="12" class="mb-2">
+                            <label for="name">โทร</label>
+                            <b-form-input max-length="10" type="text" id="phone" name="phone"
+                                          v-bind:value="(datas.phone !== undefined) ? datas.phone:''"></b-form-input>
+                        </b-col>
+                        <b-col md="12">
+                            <b-button type="submit" size="dg" variant="success" style="margin:5px"><i
+                                    class="fa fa-dot-circle-o"></i> บันทึก
+                            </b-button>
+                        </b-col>
+                    </b-row>
+                </b-form>
+            </b-col>
+        </b-row>
+    </b-card>
 
 </template>
+<script>
+  import axios from 'axios'
 
+  export default {
+    name: "Profile",
+    data: function () {
+      return {
+        datas: this.datas
+      }
+    },
+    mounted() {
+      this.base_api = localStorage.base_api
+      this.token = localStorage.usertoken
+      this.getData()
+    },
+    methods: {
+      getData() {
+        this.$http.get(this.base_api + '/admin/users/test@test.com', {
+          headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Content-Type': 'application/json'
+          }
+        }).then((res) => {
+          this.datas = res.data.results.data[0][0]
+        })
+      },
+      submitData() {
+        let api = this.base_api+'/admin/users'
+        this.$http.put(api,{
+          email: 'test@test.com',
+          firstname: fname.value,
+          lastname: lname.value,
+          phone: phone.value
+        }, {
+          headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Content-Type': 'application/json'
+          }
+        }).then((res) => {
+          if (res.status === 200){
+            this.$alertify.success('บันทึกข้อมูลเรียบร้อย');
+          }
+        })
+      }
+    }
+  }
+</script>
 
