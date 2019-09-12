@@ -15,9 +15,16 @@ const Typography = () =>
     import ('@/views/theme/Typography')
 const ManageUser = () =>
     import ('@/views/manage/manageUser')
-
 const ManageTech = () =>
     import ('@/views/manage/manageTechnician')
+const UpdateProfile = () =>
+    import ('@/views/manage/updateProfile')
+const UpdateTechnician = () =>
+    import ('@/views/manage/updateTechnician')
+const InsertUser = () =>
+    import ('@/views/manage/insertUser')
+const InsertTechnician = () =>
+    import ('@/views/manage/insertTechnician')
 
 const Charts = () =>
     import ('@/views/Charts')
@@ -144,15 +151,28 @@ export default new Router({
                     path: 'manageuser',
                     name: 'ManageUser',
                     component: ManageUser
-                },{
-                  path: 'ManageTechnician',
-                  name: 'ManageTech',
-                  component: ManageTech
-              },
+                }, {
+                    path: 'ManageTechnician',
+                    name: 'ManageTech',
+                    component: ManageTech
+                },
                 {
-                    path: 'charts',
-                    name: 'Charts',
-                    component: Charts
+                    path: 'updateProfile/:email',
+                    name: 'UpdateProfile',
+                    component: UpdateProfile
+                }, {
+                    path: 'updateTechnician/:email',
+                    name: 'UpdateTechnician',
+                    component: UpdateTechnician
+                },
+                {
+                    path: 'insertUser',
+                    name: 'InsertUser',
+                    component: InsertUser
+                }, {
+                    path: 'insertTechnician',
+                    name: 'InsertTechnician',
+                    component: InsertTechnician
                 },
                 {
                     path: 'widgets',
