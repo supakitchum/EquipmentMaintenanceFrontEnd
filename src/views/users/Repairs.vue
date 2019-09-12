@@ -39,6 +39,7 @@
       return {
         datas: [],
         fields: [
+          {key: 'index', label: 'ลำดับ', sortable: true},
           {key: 'title', label: 'ชื่อรายการ'},
           {key: 'detail', label: 'รายละเอียด'},
           {key: 'create_date', label: 'วันที่แจ้ง', sortable: true},
@@ -65,6 +66,7 @@
           
 
           this.datas.forEach((value, index) => {
+            this.datas[index].index = index + 1
             this.datas[index].create_date = value.create_date.slice(0, 10);
             if (value.status == 1) {
               this.datas[index].status = 'รอดำเนินการ'

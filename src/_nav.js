@@ -36,6 +36,16 @@ export default {
             name: 'History to Fix',
             url: '/history',
             icon: 'icon-drop'
+        },        
+        {
+            name: 'รายการแจ้งซ่อม',
+            url: '/users/repair',
+            icon: 'icon-note'
+        },        
+        {
+            name: 'ประวัติการแจ้งซ่อม',
+            url: '/users/history',
+            icon: 'icon-layers'
         },
         {
             name: 'Typography',
