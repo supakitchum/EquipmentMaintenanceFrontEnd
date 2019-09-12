@@ -34,6 +34,15 @@ export default {
         }).then((res) => {
           this.datas = res.data.results.data
           console.log(this.datas)
+
+          this.datas.forEach((value, index) => {
+            this.datas[index].create_date = value.create_date.slice(0, 10);
+            if (value.status == 3) {
+              this.datas[index].status = 'ดำเนินการเสร็จสิ้น'
+            } else if (value.status == 2) {
+              this.datas[index].status = 'กำลังดำเนินการ'
+            } 
+          })
         })
       }
   },

@@ -1,12 +1,15 @@
 <template>
   <div class="animated fadeIn">
     <b-row>
-      <b-col lg="12">
-        <c-table
-          :table-data="datas"
-          :fields="fields"
-          caption="<i class='fa fa-align-justify'></i> ประวัติการซ่อม"
-        ></c-table>
+      <b-col sm="12">
+        <b-card>
+        <div slot="header">อัพเดท</div>
+          <b-table :items="datas" :fields="fields">
+              <template slot="_id" slot-scope="data">
+                <b-button @click="$router.push({path: '/updatestatus',query: { id: data.item._id,title: data.item.title,detail: data.item.detail }})">{{ data.item._id }}</b-button>
+              </template>
+          </b-table>
+        </b-card>
       </b-col>
     </b-row>
   </div>
@@ -33,7 +36,15 @@ export default {
           }
         }).then((res) => {
           this.datas = res.data.results.data
-          console.log(this.datas)
+
+          this.datas.forEach((value, index) => {
+            this.datas[index].create_date = value.create_date.slice(0, 10);
+            if (value.status == 1) {
+              this.datas[index].status = 'รอดำเนินการ'
+            } else if (value.status == 2) {
+              this.datas[index].status = 'กำลังดำเนินการ'
+            } 
+          })
         })
       }
   },
@@ -41,12 +52,12 @@ export default {
     return {
       datas: [],
       fields: [
-        {key: '_id', label: 'รหัส', sortable: true},
         {key: 'title', label: 'ชื่อรายการ'},
         {key: 'detail', label: 'รายละเอียด'},
         {key: 'position_repair', label: 'สถานที่อยู่'},
         {key: 'create_date', label: 'วันที่แจ้ง'},
-        {key: 'status', label: 'สถานะ', sortable: true}
+        {key: 'status', label: 'สถานะ', sortable: true},
+        {key: '_id', label: 'การกระทำ', sortable: true}
       ],
     }
   }

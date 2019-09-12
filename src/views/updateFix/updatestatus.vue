@@ -16,22 +16,18 @@
             <b-col sm="7" style="margin-top:50px;">
                 <b-form @submit.prevent="submitData">
                     <b-row>
-                        <b-col md="6" class="mb-2">
-                            <label for="name">ชื่อ</label>
-                            <b-form-input type="text" name="name" id="name"
-                                          v-bind:value="(datas.name !== undefined) ? datas.name:''"></b-form-input>
+                        <b-col md="12" class="mb-2">
+                            <p><b>ชื่อรายการ:</b> {{ (this.$route.query.title !== undefined) ? this.$route.query.title:'' }}</p>
                         </b-col>
                         <b-col md="12" class="mb-2">
-                            <label for="name">รายละเอียด</label>
-                            <b-form-input max-length="10" type="text" id="phone" name="discription"
-                                          v-bind:value="(datas.dicription !== undefined) ? datas.discription:''"></b-form-input>
+                            <p><b>รายละเอียด:</b> {{ (this.$route.query.detail !== undefined) ? this.$route.query.detail:'' }}</p>
                         </b-col>
                         <b-col
             label="Select"
             label-for="basicSelect"
             :label-cols="3"
             id="status"
-            ><label for="name">สถานะ</label>
+            ><label for="name"><b>สถานะ</b></label>
             <b-form-select id="basicSelect"
               :plain="true"
               :options="['กรุณาเลือกสถานะ','กำลังดำเนินการ', 'ดำเนินการเสร็จสิ้น']"
@@ -42,7 +38,7 @@
                             <b-button type="submit" size="dg" variant="success" style="margin:5px"><i
                                     class="fa fa-dot-circle-o"></i> บันทึก
                             </b-button>
-                            <b-button href="http://localhost:8080/#/updatefix" type="cancel" size="dg" variant="danger" style="margin:5px">
+                            <b-button @click="$router.go(-1)" type="cancel" size="dg" variant="danger" style="margin:5px">
                                     <i class="fa fa-ban"></i> ยกเลิก
                             </b-button>
                         </b-col>
@@ -66,25 +62,13 @@
     mounted() {
       this.base_api = localStorage.base_api
       this.token = localStorage.usertoken
-      this.getData()
     },
     methods: {
-      getData() {
-        this.$http.get(this.base_api + '/admin/users/test@test.com', {
-          headers: {
-            'Authorization': `Bearer ${this.token}`,
-            'Content-Type': 'application/json'
-          }
-        }).then((res) => {
-          this.datas = res.data.results.data[0][0]
-        })
-      },
       submitData() {
-        let api = this.base_api+'/admin/users'
+        let api = this.base_api+'/technician/repair'
         this.$http.put(api,{
-          name: name.value,
-          status: status.value,
-          discription: discription.value
+          _id: this.$route.query.id,
+          status: 3
         }, {
           headers: {
             'Authorization': `Bearer ${this.token}`,
@@ -93,6 +77,7 @@
         }).then((res) => {
           if (res.status === 200){
             this.$alertify.success('บันทึกข้อมูลเรียบร้อย');
+            $router.push('/history')
           }
         })
       }

@@ -11,7 +11,7 @@ const Dashboard = () =>
 
 const History = () =>
     import ('@/views/historytoFix/historytechnician')
-const Profiles = () => import('@/views/profiles/profile')
+const TechProfile = () => import('@/views/profiles/profile')
 const Update = () => import('@/views/updateFix/updatefix')
 const Updatestatus = () => import('@/views/updateFix/updatestatus')
     
@@ -133,11 +133,13 @@ export default new Router({
             redirect: '/dashboard',
             name: 'Home',
             component: DefaultContainer,
-            children: [{
+            children: [
+                {
                     path: 'dashboard',
                     name: 'Dashboard',
                     component: Dashboard
-                }, {
+                }, 
+                {
                     path: 'history',
                     name: 'History',
                     component: History
@@ -146,28 +148,28 @@ export default new Router({
                     path: 'manageuser',
                     name: 'ManageUser',
                     component: ManageUser
-                },{
-                  path: 'ManageTechnician',
-                  name: 'ManageTech',
-                  component: ManageTech
-              },
-              {
-                path: 'profiles',
-                name: 'Profiles',
-                component: Profiles
-              }
-              ,
-              {
-                path: 'updatefix',
-                name: 'Update',
-                component: Update
-              },
-              {
-                path: 'updatestatus',
-                name: 'Updatestatus',
-                component: Updatestatus
-              }
-              ,
+                },
+                {
+                    path: 'ManageTechnician',
+                    name: 'ManageTech',
+                    component: ManageTech
+                },
+                {
+                    path: 'techprofile',
+                    name: 'TechProfile',
+                    component: TechProfile
+                },
+                {
+                    path: 'updatefix',
+                    name: 'Update',
+                    component: Update
+                },
+                {
+                    path: 'updatestatus',
+                    name: 'Updatestatus',
+                    component: Updatestatus
+                }
+                ,
                 {
                     path: 'charts',
                     name: 'Charts',

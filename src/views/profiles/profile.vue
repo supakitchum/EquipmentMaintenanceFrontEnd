@@ -36,6 +36,16 @@
                             <b-form-input max-length="10" type="text" id="phone" name="phone"
                                           v-bind:value="(datas.phone !== undefined) ? datas.phone:''"></b-form-input>
                         </b-col>
+                        <b-col md="12" class="mb-2">
+                            <label for="name">รหัสพนักงาน</label>
+                            <b-form-input max-length="10" type="text" id="id_employee" name="id_employee"
+                                          v-bind:value="(datas.id_employee !== undefined) ? datas.id_employee:''"></b-form-input>
+                        </b-col>
+                                                <b-col md="12" class="mb-2">
+                            <label for="name">ที่อยู่</label>
+                            <b-form-input max-length="10" type="text" id="position" name="position"
+                                          v-bind:value="(datas.position !== undefined) ? datas.position:''"></b-form-input>
+                        </b-col>
                         <b-col md="12">
                             <b-button type="submit" size="dg" variant="success" style="margin:5px"><i
                                     class="fa fa-dot-circle-o"></i> บันทึก
@@ -49,10 +59,9 @@
 
 </template>
 <script>
-  import axios from 'axios'
 
   export default {
-    name: "Profile",
+    name: "TechProfile",
     data: function () {
       return {
         datas: this.datas
@@ -65,22 +74,24 @@
     },
     methods: {
       getData() {
-        this.$http.get(this.base_api + '/admin/users/test@test.com', {
+        this.$http.get(this.base_api + '/technician', {
           headers: {
             'Authorization': `Bearer ${this.token}`,
             'Content-Type': 'application/json'
           }
         }).then((res) => {
-          this.datas = res.data.results.data[0][0]
+          this.datas = res.data.results.data[0]
         })
       },
       submitData() {
-        let api = this.base_api+'/admin/users'
+        let api = this.base_api+'/technician'
         this.$http.put(api,{
           email: 'test@test.com',
           firstname: fname.value,
           lastname: lname.value,
-          phone: phone.value
+          phone: phone.value,
+          id_employee: id_employee.value,
+          position: position.value
         }, {
           headers: {
             'Authorization': `Bearer ${this.token}`,
