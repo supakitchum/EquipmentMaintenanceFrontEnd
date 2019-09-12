@@ -10,19 +10,22 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueAlertify from 'vue-alertify';
+localStorage.base_api = 'http://192.168.20.147:3000/api/v1'
 
-// todo
-// cssVars()
+Vue.use(VueAlertify);
 
-Vue.use(BootstrapVue)
 Vue.use(VueAxios, axios)
-window.axios=require('axios')
+    // todo
+    // cssVars()
+Vue.use(BootstrapVue)
+
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: {
-    App
-  }
+    el: '#app',
+    router,
+    template: '<App/>',
+    components: {
+        App
+    }
 })

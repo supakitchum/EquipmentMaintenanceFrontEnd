@@ -2,16 +2,10 @@
   <div class="animated fadeIn">
     <b-row>
       <b-col lg="12">
-<<<<<<< HEAD
-
-        <c-table
-          :table-data="datas"
-=======
         <c-table
           :table-data="items"
->>>>>>> origin/feature/technician
           :fields="fields"
-          caption="<i class='fa fa-align-justify'></i>จัดการผู้แจ้งซ่อม"
+          caption="<i class='fa fa-align-justify'></i>จัดการช่าง"
         ></c-table>
       </b-col>
     </b-row>
@@ -23,39 +17,40 @@ import { shuffleArray } from "@/shared/utils";
 import cTable from "../base/Table.vue";
 
 export default {
-  name: "manageUser",
-  components: { cTable },
   mounted() {
     this.token = localStorage.usertoken;
-    this.base_api = localStorage.getItem('base_api')
-    this.getData()
+    // console.log(token);
+    if (!this.token) {
+      this.$router.push("/login");
+    }
+
+    this.getData();
   },
-  methods : {
-    getData() {
-      this.$http.get(this.base_api + '/admin/users', {
-        headers: {
-          'Authorization': `Bearer ${this.token}`,
-          'Content-Type': 'application/json'
-        }
-      }).then((res) => {
-        this.datas = res.data.results.data[0]
-        console.log(this.datas)
+  name: "manageTechnician",
+  components: { cTable },
+  methods: {
+    getData: async function() {
+      console.log(localStorage.usertoken);
+      await this.axios({
+        method: "get",
+        url: "http://192.168.20.147:3000/api/v1/admin/users",
+        config: { headers: { "token": this.token } }
       })
+        .then(resp => {
+          // this.datas = resp;
+          console.log(resp);
+        })
+        .catch(err => {
+          reject(err);
+        });
     }
   },
   data: () => {
     return {
-      items: someData(),
-<<<<<<< HEAD
-      datas: [],
-      itemsArray: someData,
-      fields: [
-        { key: "email", label: "ลำดับ" },
-=======
-      itemsArray: someData,
+      items: someData,
+      itemsArray: someData(),
       fields: [
         { key: "username", label: "ลำดับ" },
->>>>>>> origin/feature/technician
         { key: "role", label: "ชื่อรายการ" },
         { key: "username", label: "ผู้แจ้ง", sortable: true },
         { key: "registered", label: "วันที่แจ้ง" },
