@@ -7,7 +7,7 @@
       </template>
     </b-table>
     <nav>
-      <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" prev-text="Prev" next-text="Next" hide-goto-end-buttons/>
+      <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" prev-text="ย้อนกลับ" next-text="ถัดไป" hide-goto-end-buttons/>
     </nav>
   </b-card>
 </template>

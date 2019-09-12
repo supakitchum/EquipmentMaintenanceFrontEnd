@@ -7,25 +7,25 @@
         <img class="navbar-brand-minimized" src="img/logo-symbol.png" width="30" height="30" alt="CoreUI Logo">
       </b-link>
       <SidebarToggler class="d-md-down-none" display="lg" :defaultOpen=true />
-      <b-navbar-nav class="d-md-down-none">
+      <!-- <b-navbar-nav class="d-md-down-none">
         <b-nav-item class="px-3" to="/dashboard">Dashboard</b-nav-item>
         <b-nav-item class="px-3" to="/users" exact>Users</b-nav-item>
         <b-nav-item class="px-3">Settings</b-nav-item>
-      </b-navbar-nav>
+      </b-navbar-nav> -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item class="d-md-down-none">
+        <!-- <b-nav-item class="d-md-down-none">
           <i class="icon-bell"></i>
           <b-badge pill variant="danger">5</b-badge>
-        </b-nav-item>
-        <b-nav-item class="d-md-down-none">
+        </b-nav-item> -->
+        <!-- <b-nav-item class="d-md-down-none">
           <i class="icon-list"></i>
-        </b-nav-item>
-        <b-nav-item class="d-md-down-none">
+        </b-nav-item> -->
+        <!-- <b-nav-item class="d-md-down-none">
           <i class="icon-location-pin"></i>
-        </b-nav-item>
-        <DefaultHeaderDropdownAccnt/>
+        </b-nav-item> -->
+        <DefaultHeaderDropdownAccnt style="margin-right:24px"/>
       </b-navbar-nav>
-      <AsideToggler class="d-none d-lg-block" />
+      <!-- <AsideToggler class="d-none d-lg-block" /> -->
       <!--<AsideToggler class="d-lg-none" mobile />-->
     </AppHeader>
     <div class="app-body">
@@ -50,12 +50,12 @@
     <TheFooter>
       <!--footer-->
       <div>
-        <a href="https://coreui.io">CoreUI</a>
-        <span class="ml-1">&copy; 2018 creativeLabs.</span>
+        <a href="#">EM Project</a>
+        <span class="ml-1">&copy; 2019 KaikumTeam.</span>
       </div>
       <div class="ml-auto">
         <span class="mr-1">Powered by</span>
-        <a href="https://coreui.io">CoreUI for Vue</a>
+        <a href=#>KaikumTeam</a>
       </div>
     </TheFooter>
   </div>

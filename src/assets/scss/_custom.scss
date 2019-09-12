@@ -84,3 +84,10 @@ body {
 .form-control:focus {
   border-color: #01B901;
 }
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color:  #01B901;
+  border-color:  #01B901;
+}
