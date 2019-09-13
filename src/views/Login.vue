@@ -21,7 +21,8 @@
                       class="form-control"
                       placeholder="Username"
                       autocomplete="username email"
-                      id="email" required
+                      id="email"
+                      required
                     />
                   </b-input-group>
                   <b-input-group class="mb-4">
@@ -84,7 +85,7 @@ export default {
               window.location.href = '/'
             }
           } else {
-            this.$alertify.error('ไม่พบข้อมูลของบัญชี');
+            this.$alertify.error("ไม่พบข้อมูลของบัญชี");
           }
         })
         .catch(err => {

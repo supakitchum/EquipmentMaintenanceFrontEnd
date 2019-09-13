@@ -26,8 +26,8 @@
         :total-rows="totalRows"
         :per-page="perPage"
         v-model="currentPage"
-        prev-text="Prev"
-        next-text="Next"
+        prev-text="ย้อนกลับ"
+        next-text="ถัดไป"
         hide-goto-end-buttons
       />
     </nav>
@@ -107,6 +107,12 @@ export default {
         ? "secondary"
         : status === "Pending"
         ? "warning"
+        : status === "กำลังดำเนินการ"
+        ? "warning"
+        : status === "รอดำเนินการ"
+        ? "secondary"
+        : status === "เสร็จสิ้น"
+        ? "success"
         : status === "Banned"
         ? "danger"
         : "primary";

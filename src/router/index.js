@@ -168,9 +168,9 @@ export default new Router({
                     component: ManageTech
                 },
                 {
-                  path: '/report',
-                  name: 'Report',
-                  component: Report
+                    path: '/report',
+                    name: 'Report',
+                    component: Report
                 },
                 {
                     path: 'techprofile',

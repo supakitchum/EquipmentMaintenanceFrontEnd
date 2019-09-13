@@ -4,17 +4,9 @@
       <b-col sm="6" lg="3">
         <b-card no-body class="bg-primary">
           <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-              <b-dropdown-item>Action</b-dropdown-item>
-              <b-dropdown-item>Another action</b-dropdown-item>
-              <b-dropdown-item>Something else here...</b-dropdown-item>
-              <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-            </b-dropdown>
-            <h4 class="mb-0">9.823</h4>
-            <p>Members online</p>
+            <p>จำนวนการแจ้งซ่อม</p>
+            <h2>วันนี้</h2>
+            <h4 class="mb-0">{{ datas.count_repair1 }} รายการ</h4>
           </b-card-body>
           <card-line1-chart-example
             chartId="card-chart-01"
@@ -27,17 +19,9 @@
       <b-col sm="6" lg="3">
         <b-card no-body class="bg-info">
           <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
-              <template slot="button-content">
-                <i class="icon-location-pin"></i>
-              </template>
-              <b-dropdown-item>Action</b-dropdown-item>
-              <b-dropdown-item>Another action</b-dropdown-item>
-              <b-dropdown-item>Something else here...</b-dropdown-item>
-              <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-            </b-dropdown>
-            <h4 class="mb-0">9.823</h4>
-            <p>Members online</p>
+            <p>รายการซ่อมกำลังดำเนินการ</p>
+            <h2>วันนี้</h2>
+            <h4 class="mb-0">{{ datas.count_repair2 }} รายการ</h4>
           </b-card-body>
           <card-line2-chart-example
             chartId="card-chart-02"
@@ -50,17 +34,9 @@
       <b-col sm="6" lg="3">
         <b-card no-body class="bg-warning">
           <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-              <b-dropdown-item>Action</b-dropdown-item>
-              <b-dropdown-item>Another action</b-dropdown-item>
-              <b-dropdown-item>Something else here...</b-dropdown-item>
-              <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-            </b-dropdown>
-            <h4 class="mb-0">9.823</h4>
-            <p>Members online</p>
+            <p>รายการซ่อมสำเร็จ</p>
+            <h2>วันนี้</h2>
+            <h4 class="mb-0">{{ datas.count_repair3 }} รายการ</h4>
           </b-card-body>
           <card-line3-chart-example
             chartId="card-chart-03"
@@ -73,17 +49,9 @@
       <b-col sm="6" lg="3">
         <b-card no-body class="bg-danger">
           <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-              <b-dropdown-item>Action</b-dropdown-item>
-              <b-dropdown-item>Another action</b-dropdown-item>
-              <b-dropdown-item>Something else here...</b-dropdown-item>
-              <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-            </b-dropdown>
-            <h4 class="mb-0">9.823</h4>
-            <p>Members online</p>
+            <p>จำนวนช่างซ่อม</p>
+            <h2>วันนี้</h2>
+            <h4 class="mb-0">{{ datas.count_tech }} คน</h4>
           </b-card-body>
           <card-bar-chart-example
             chartId="card-chart-04"
@@ -95,13 +63,51 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col lg="12">
-        <c-table
-          :table-data="items"
-          :fields="fields"
-          caption="<i class='fa fa-align-justify'></i>รายการแจ้งซ่อม"
-        ></c-table>
-      </b-col>
+      <b-card>
+        <b-col lg="12">
+          <b-table
+            :items="dataswork"
+            :fields="fields"
+            striped
+            responsive="lg"
+            fixed="true"
+            :current-page="currentPage"
+            :per-page="perPage"
+          >
+            <template slot="managework" slot-scope="action">
+              <!-- <b-button size="sm" @click="updateData(action.item.email)">แก้ไข</b-button> -->
+              <b-button size="sm" @click="action.toggleDetails" class="mr-2">เลือกช่าง</b-button>
+              <!-- As `row.showDetails` is one-way, we call the toggleDetails function on @change -->
+            </template>
+
+            <template v-slot:row-details="row">
+              <b-card>
+                <b-form-group label="เลือกช่าง">
+                  <b-form-checkbox-group
+                    :options="options"
+                    v-model="selected"
+                    stacked
+                    buttons
+                    @input="insertTech(selected[0],row.item._id)"
+                    button-variant="info"
+                  ></b-form-checkbox-group>
+                </b-form-group>
+              </b-card>
+            </template>
+          </b-table>
+          <nav>
+            <b-pagination
+              size="sm"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              v-model="currentPage"
+              prev-text="Prev"
+              next-text="Next"
+              hide-goto-end-buttons
+            />
+          </nav>
+        </b-col>
+      </b-card>
     </b-row>
   </div>
 </template>
@@ -120,10 +126,84 @@ import { Callout } from "@coreui/vue";
 
 export default {
   mounted() {
-    const token = localStorage.usertoken;
-    console.log(token);
-    if (!token) {
-      this.$router.push("/login");
+    this.token = localStorage.usertoken;
+    this.base_api = localStorage.getItem("base_api");
+    this.getData();
+    this.getWork();
+  },
+  methods: {
+    async insertTech(email, id_task) {
+      console.log(email, id_task);
+      let api = this.base_api + "/admin/repair";
+      this.$http
+        .put(
+          api,
+          {
+            email_technician: email,
+            _id: id_task
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+              "Content-Type": "application/json"
+            }
+          }
+        )
+        .then(res => {
+          this.getData();
+          this.getWork();
+        });
+    },
+    getRowCount(data) {
+      return data.length;
+    },
+
+    async getData() {
+      await this.$http
+        .get(this.base_api + "/admin/dashboard", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => {
+          this.datas = res.data.results;
+          console.log(this.datas);
+        });
+    },
+    async getWork() {
+      await this.$http
+        .get(this.base_api + "/admin/works", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => {
+          this.dataswork = res.data.results.data.works;
+          this.datastech = res.data.results.data.technician;
+          this.dataswork.forEach((value, index) => {
+            this.dataswork[index].index = index + 1;
+            this.dataswork[index].create_date = value.create_date.slice(0, 10);
+            if (value.status == 1) {
+              this.dataswork[index].status = "รอดำเนินการ";
+            } else if (value.status == 2) {
+              this.dataswork[index].status = "กำลังดำเนินการ";
+            }
+          });
+          // console.log(this.datastech);
+          this.datastech.forEach((value, index) => {
+            var x = {};
+            const works = value.works.filter(value => {
+              return value.status === "2";
+            });
+            x.text = `${value.firstname} ${value.lastname} ${works.length}`;
+            x.value = value.email;
+            this.options[index] = x;
+          });
+          this.selected = [];
+          // console.log(this.options);
+        });
     }
   },
   name: "dashboard",
@@ -140,174 +220,24 @@ export default {
   },
   data: () => {
     return {
-      items: someData,
-      itemsArray: someData(),
+      datas: [],
+      dataswork: [],
+      datastech: [],
+      selected: [],
       fields: [
-        { key: "username", label: "ลำดับ", sortable: true },
-        { key: "role", label: "ชื่อรายการ" },
-        { key: "username", label: "ผู้แจ้ง", sortable: true },
-        { key: "registered", label: "วันที่แจ้ง" },
-        { key: "status", label: "สถานะ", sortable: true }
-      ]
+        { key: "index", label: "ลำดับ" },
+        { key: "title", label: "ชื่อรายการ" },
+        { key: "id_employee_user", label: "ผู้แจ้ง" },
+        { key: "create_date", label: "วันที่แจ้ง" },
+        { key: "managework", label: "จัดการงานให้ช่าง" }
+      ],
+      options: [],
+      currentPage: 1,
+      perPage: 10,
+      totalRows: 46
     };
   }
 };
-const someData = () =>
-  shuffleArray([
-    {
-      username: "Samppa Nori",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active",
-      _rowVariant: "success"
-    },
-    {
-      username: "Estavan Lykos",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned",
-      _rowVariant: "danger"
-    },
-    {
-      username: "Chetan Mohamed",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive",
-      _rowVariant: "info"
-    },
-    {
-      username: "Derick Maximinus",
-      registered: "2012/03/01",
-      role: "Member",
-      status: "Pending"
-    },
-    {
-      username: "Friderik Dávid",
-      registered: "2012/01/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Yiorgos Avraamu",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active"
-    },
-    {
-      username: "Avram Tarasios",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned"
-    },
-    {
-      username: "Quintin Ed",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive"
-    },
-    {
-      username: "Enéas Kwadwo",
-      registered: "2012/03/01",
-      role: "Member",
-      status: "Pending"
-    },
-    {
-      username: "Agapetus Tadeáš",
-      registered: "2012/01/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Carwyn Fachtna",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active"
-    },
-    {
-      username: "Nehemiah Tatius",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned"
-    },
-    {
-      username: "Ebbe Gemariah",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive"
-    },
-    {
-      username: "Eustorgios Amulius",
-      registered: "2012/03/01",
-      role: "Member",
-      status: "Pending"
-    },
-    {
-      username: "Leopold Gáspár",
-      registered: "2012/01/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Pompeius René",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active"
-    },
-    {
-      username: "Paĉjo Jadon",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned"
-    },
-    {
-      username: "Micheal Mercurius",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive"
-    },
-    {
-      username: "Ganesha Dubhghall",
-      registered: "2012/03/01",
-      role: "Member",
-      status: "Pending"
-    },
-    {
-      username: "Hiroto Šimun",
-      registered: "2012/01/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Vishnu Serghei",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active"
-    },
-    {
-      username: "Zbyněk Phoibos",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned"
-    },
-    {
-      username: "Einar Randall",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive"
-    },
-    {
-      username: "Félix Troels",
-      registered: "2012/03/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Aulus Agmundr",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Pending"
-    }
-  ]);
 </script>
 
 <style>
