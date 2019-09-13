@@ -21,7 +21,8 @@
                       class="form-control"
                       placeholder="Username"
                       autocomplete="username email"
-                      id="email" required
+                      id="email"
+                      required
                     />
                   </b-input-group>
                   <b-input-group class="mb-4">
@@ -74,14 +75,7 @@ export default {
         config: { headers: { "Content-Type": "application/json" } }
       })
         .then(resp => {
-<<<<<<< HEAD
-          const token = resp.data.results.token;
-          console.log(token);
-          localStorage.setItem("usertoken", token); // store the token in localstorage
-          if (token != null) {
-            this.$router.push("/");
-=======
-          if (resp.status === 200){
+          if (resp.status === 200) {
             const token = resp.data.results.token;
             console.log(token);
             localStorage.setItem("usertoken", token); // store the token in localstorage
@@ -89,8 +83,7 @@ export default {
               this.$router.push("/");
             }
           } else {
-            this.$alertify.error('ไม่พบข้อมูลของบัญชี');
->>>>>>> origin/feature/report
+            this.$alertify.error("ไม่พบข้อมูลของบัญชี");
           }
         })
         .catch(err => {

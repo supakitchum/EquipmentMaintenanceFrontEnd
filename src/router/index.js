@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Containers
-const DefaultContainer = () => import('@/containers/DefaultContainer')
+const DefaultContainer = () =>
+    import ('@/containers/DefaultContainer')
 
 // Views
 const Dashboard = () =>
@@ -115,7 +116,8 @@ const Repair = () =>
 const AddRepair = () =>
     import ('@/views/users/AddRepair')
 
-const Report = () => import('@/views/admin/reports')
+const Report = () =>
+    import ('@/views/admin/reports')
 
 
 
@@ -150,24 +152,16 @@ export default new Router({
                     path: 'manageuser',
                     name: 'ManageUser',
                     component: ManageUser
-<<<<<<< HEAD
                 }, {
-=======
-                },
-                {
->>>>>>> origin/feature/report
                     path: 'ManageTechnician',
                     name: 'ManageTech',
                     component: ManageTech
                 },
-<<<<<<< HEAD
-=======
                 {
-                  path: '/report',
-                  name: 'Report',
-                  component: Report
+                    path: '/report',
+                    name: 'Report',
+                    component: Report
                 },
->>>>>>> origin/feature/report
                 {
                     path: 'updateProfile/:email',
                     name: 'UpdateProfile',
