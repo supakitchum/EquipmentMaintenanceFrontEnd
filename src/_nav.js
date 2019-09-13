@@ -9,7 +9,7 @@ if (localStorage.type == "user") {
         {
             name: 'ประวัติการแจ้งซ่อม',
             url: '/users/history',
-            icon: 'icon-layers'
+            icon: 'fa fa-history'
         }
     )
 } else if (localStorage.type == "admin") {
@@ -22,12 +22,12 @@ if (localStorage.type == "user") {
         {
             name: 'จัดการผู้ใช้',
             url: '/manageuser',
-            icon: 'icon-pencil'
+            icon: 'fa fa-users'
         },
         {
             name: 'จัดการช่างซ่อม',
             url: '/manageTechnician',
-            icon: 'icon-pencil'
+            icon: 'fa fa-user'
         },
         {
             name: 'รายงาน',
@@ -40,12 +40,12 @@ if (localStorage.type == "user") {
         {
             name: 'อัพเดทสถานะการซ่อม',
             url: '/updatefix',
-            icon: 'icon-layers'
+            icon: 'fa fa-pencil-square-o'
         },
         {
             name: 'ประวัติการซ่อม',
             url: '/history',
-            icon: 'icon-note'
+            icon: 'fa fa-history'
         }
     )
 }
