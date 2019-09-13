@@ -12,10 +12,8 @@
         :fields="fields"
         striped
         responsive="sm"
-        :table-variant="white"
         :current-page="currentPage"
         :per-page="perPage"
-        @filtered="onFiltered"
       >
         <template slot="actions" slot-scope="action">
           <b-button size="sm" @click="updateData(action.item.email)">แก้ไข</b-button>
@@ -23,14 +21,17 @@
         </template>
       </b-table>
       <b-col sm="7" md="6" class="my-1">
-        <b-pagination
-          :total-rows="totalRows"
-          :per-page="perPage"
-          v-model="currentPage"
-          prev-text="Prev"
-          next-text="Next"
-          hide-goto-end-buttons
-        />
+        <nav>
+          <b-pagination
+            size="sm"
+            :total-rows="datas.length"
+            :per-page="perPage"
+            v-model="currentPage"
+            prev-text="Prev"
+            next-text="Next"
+            hide-goto-end-buttons
+          />
+        </nav>
       </b-col>
     </b-card>
   </div>
@@ -94,7 +95,10 @@ export default {
         { key: "lastname", label: "นามสกุล" },
         { key: "position", label: "ตำแหน่ง", sortable: true },
         { key: "actions", label: "Actions" }
-      ]
+      ],
+      currentPage: 1,
+      perPage: 10,
+      totalRows: 0
     };
   }
 };
