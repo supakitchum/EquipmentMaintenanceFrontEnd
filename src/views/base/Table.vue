@@ -98,6 +98,7 @@ export default {
     }
   },
   methods: {
+<<<<<<< HEAD
     getBadge(status) {
       return status === "Active"
         ? "success"
@@ -108,6 +109,16 @@ export default {
         : status === "Banned"
         ? "danger"
         : "primary";
+=======
+    getBadge (status) {
+      return status === 'Active' ? 'success'
+        : status === 'Inactive' ? 'secondary'
+          : status === 'Pending' ? 'warning'
+            : status === 'กำลังดำเนินการ' ? 'warning'
+                : status === 'รอดำเนินการ' ? 'secondary'
+                    : status === 'เสร็จสิ้น' ? 'success'
+                      : status === 'Banned' ? 'danger' : 'primary'
+>>>>>>> origin/feature/report
     },
     getRowCount: function() {
       return this.items.length;

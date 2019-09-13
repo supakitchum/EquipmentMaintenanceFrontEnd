@@ -33,6 +33,11 @@ export default {
             icon: 'icon-calculator'
         },
         {
+          name: 'Report',
+          url: '/report',
+          icon: 'icon-calculator'
+        },
+        {
             name: 'History to Fix',
             url: '/history',
             icon: 'icon-drop'

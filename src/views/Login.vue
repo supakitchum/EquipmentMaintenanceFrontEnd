@@ -17,11 +17,11 @@
                     </b-input-group-prepend>
                     <b-form-input
                       name="email"
-                      type="text"
+                      type="email"
                       class="form-control"
                       placeholder="Username"
                       autocomplete="username email"
-                      id="email"
+                      id="email" required
                     />
                   </b-input-group>
                   <b-input-group class="mb-4">
@@ -74,11 +74,23 @@ export default {
         config: { headers: { "Content-Type": "application/json" } }
       })
         .then(resp => {
+<<<<<<< HEAD
           const token = resp.data.results.token;
           console.log(token);
           localStorage.setItem("usertoken", token); // store the token in localstorage
           if (token != null) {
             this.$router.push("/");
+=======
+          if (resp.status === 200){
+            const token = resp.data.results.token;
+            console.log(token);
+            localStorage.setItem("usertoken", token); // store the token in localstorage
+            if (token != null) {
+              this.$router.push("/");
+            }
+          } else {
+            this.$alertify.error('ไม่พบข้อมูลของบัญชี');
+>>>>>>> origin/feature/report
           }
         })
         .catch(err => {
