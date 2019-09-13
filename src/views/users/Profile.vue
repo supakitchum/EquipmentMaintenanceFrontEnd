@@ -21,22 +21,22 @@
                         <b-col md="12" class="mb-2">
                             <label for="name">อีเมลล์</label>
                             <b-form-input disabled type="text" name="email" id="email"
-                                          v-bind:value="(datas.email !== undefined) ? datas.email:''"></b-form-input>
+                                          v-bind:value="(datas.email !== undefined) ? datas.email:''" required></b-form-input>
                         </b-col>
                         <b-col md="6" class="mb-2">
                             <label for="name">ชื่อ</label>
-                            <b-form-input type="text" name="fname" id="fname"
-                                          v-bind:value="(datas.firstname !== undefined) ? datas.firstname:''"></b-form-input>
+                            <b-form-input type="text" name="fname" id="fname" pattern="[A-Za-z]+"
+                                          v-bind:value="(datas.firstname !== undefined) ? datas.firstname:''" required></b-form-input>
                         </b-col>
                         <b-col md="6" class="mb-2">
                             <label for="name">นามสกุล</label>
                             <b-form-input type="text" name="lname" id="lname"
-                                          v-bind:value="(datas.lastname !== undefined) ? datas.lastname:''"></b-form-input>
+                                          v-bind:value="(datas.lastname !== undefined) ? datas.lastname:''" required></b-form-input>
                         </b-col>
                         <b-col md="12" class="mb-2">
                             <label for="name">โทร</label>
-                            <b-form-input max-length="10" type="text" id="phone" name="phone"
-                                          v-bind:value="(datas.phone !== undefined) ? datas.phone:''"></b-form-input>
+                            <b-form-input max-length="10" type="text" maxlength="10" id="phone" name="phone"
+                                          v-bind:value="(datas.phone !== undefined) ? datas.phone:''" required></b-form-input>
                         </b-col>
                         <b-col md="12">
                             <b-button type="submit" size="dg" variant="success" style="margin:5px"><i

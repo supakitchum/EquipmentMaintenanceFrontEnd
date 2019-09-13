@@ -119,6 +119,8 @@ const AddRepair = () =>
 const ManageUser = () =>
     import ('@/views/manage/manageUser')
 
+const ResetPassword = () =>
+    import ('@/views/users/ResetPassword')
 
 
 
@@ -238,6 +240,14 @@ export default new Router({
                             },
                             name: 'History',
                             component: usersHistory,
+                        },
+                        {
+                            path: 'reset_password',
+                            meta: {
+                                label: 'Reset Password'
+                            },
+                            name: 'ResetPassword',
+                            component: ResetPassword,
                         },
                         {
                             path: 'repair',
