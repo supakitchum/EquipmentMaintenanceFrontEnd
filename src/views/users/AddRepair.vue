@@ -14,7 +14,7 @@
               label-for="name"
               :label-cols="2"
               >
-              <b-form-input id="title" name="title" type="text" autocomplete="name"></b-form-input>
+              <b-form-input id="title" name="title" type="text" autocomplete="name" required></b-form-input>
             </b-form-group>  
             <b-form-group
 
@@ -22,7 +22,7 @@
               label-for="detail"
               :label-cols="2"
               >
-              <b-form-textarea id="detail" name="detail" type="text" autocomplete="detail"></b-form-textarea>
+              <b-form-textarea id="detail" name="detail" type="text" autocomplete="detail" required></b-form-textarea>
             </b-form-group>  
             <b-form-group
 
@@ -30,7 +30,7 @@
               label-for="location"
               :label-cols="2"
               >
-              <b-form-textarea id="position_repair" name="position_repair" type="text" autocomplete="location"></b-form-textarea>
+              <b-form-textarea id="position_repair" name="position_repair" type="text" autocomplete="location" required></b-form-textarea>
             </b-form-group>  
             <b-form-group
 
@@ -38,7 +38,7 @@
               label-for="photo"
               :label-cols="2"
               >
-              <b-form-file id="photo" name="photo" size="sm"></b-form-file>            
+              <b-form-file id="photo" name="photo" size="sm" required></b-form-file>            
             </b-form-group>  
 
 
