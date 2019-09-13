@@ -14,7 +14,7 @@
                 :table-data="datas"
                 :fields="fields"
                 caption="<i class='fa fa-align-justify'></i> รายการแจ้งซ่อม"
-                
+                fixed="true"
               ></c-table>
             </b-col>
           </b-row>

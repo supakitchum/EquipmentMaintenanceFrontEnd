@@ -11,13 +11,21 @@ const Dashboard = () =>
 
 const History = () =>
     import ('@/views/historytoFix/historytechnician')
-const Typography = () =>
-    import ('@/views/theme/Typography')
-const ManageUser = () =>
-    import ('@/views/manage/manageUser')
+const TechProfile = () => import('@/views/profiles/profile')
+const Update = () => import('@/views/updateFix/updatefix')
+const Updatestatus = () => import('@/views/updateFix/updatestatus')
+
 
 const ManageTech = () =>
     import ('@/views/manage/manageTechnician')
+const UpdateProfile = () =>
+    import ('@/views/manage/updateProfile')
+const UpdateTechnician = () =>
+    import ('@/views/manage/updateTechnician')
+const InsertUser = () =>
+    import ('@/views/manage/insertUser')
+const InsertTechnician = () =>
+    import ('@/views/manage/insertTechnician')
 
 const Charts = () =>
     import ('@/views/Charts')
@@ -108,10 +116,15 @@ const Repair = () =>
     import ('@/views/users/Repairs')
 const AddRepair = () =>
     import ('@/views/users/AddRepair')
+const ManageUser = () =>
+    import ('@/views/manage/manageUser')
+
 const ResetPassword = () =>
     import ('@/views/users/ResetPassword')
 
 
+
+const Report = () => import('@/views/admin/reports')
 
 
 
@@ -133,11 +146,13 @@ export default new Router({
             redirect: '/dashboard',
             name: 'Home',
             component: DefaultContainer,
-            children: [{
+            children: [
+                {
                     path: 'dashboard',
                     name: 'Dashboard',
                     component: Dashboard
-                }, {
+                },
+                {
                     path: 'history',
                     name: 'History',
                     component: History
@@ -146,15 +161,50 @@ export default new Router({
                     path: 'manageuser',
                     name: 'ManageUser',
                     component: ManageUser
-                },{
-                  path: 'ManageTechnician',
-                  name: 'ManageTech',
-                  component: ManageTech
-              },
+                },
                 {
-                    path: 'charts',
-                    name: 'Charts',
-                    component: Charts
+                    path: 'ManageTechnician',
+                    name: 'ManageTech',
+                    component: ManageTech
+                },
+                {
+                  path: '/report',
+                  name: 'Report',
+                  component: Report
+                },
+                {
+                    path: 'techprofile',
+                    name: 'TechProfile',
+                    component: TechProfile
+                },
+                {
+                    path: 'updatefix',
+                    name: 'Update',
+                    component: Update
+                },
+                {
+                    path: 'updatestatus',
+                    name: 'Updatestatus',
+                    component: Updatestatus
+                }
+                ,
+                {
+                    path: 'updateProfile/:email',
+                    name: 'UpdateProfile',
+                    component: UpdateProfile
+                }, {
+                    path: 'updateTechnician/:email',
+                    name: 'UpdateTechnician',
+                    component: UpdateTechnician
+                },
+                {
+                    path: 'insertUser',
+                    name: 'InsertUser',
+                    component: InsertUser
+                }, {
+                    path: 'insertTechnician',
+                    name: 'InsertTechnician',
+                    component: InsertTechnician
                 },
                 {
                     path: 'widgets',
@@ -190,7 +240,7 @@ export default new Router({
                             },
                             name: 'History',
                             component: usersHistory,
-                        },                        
+                        },
                         {
                             path: 'reset_password',
                             meta: {

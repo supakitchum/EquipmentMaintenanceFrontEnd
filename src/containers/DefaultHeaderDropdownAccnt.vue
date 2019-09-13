@@ -29,7 +29,8 @@ export default {
   methods:{
     logout(){
       this.token = null;
-      this.$router.push("/login");
+      localStorage.type = null;
+      window.location.href = '#/login'
     }
   },
   data: () => {

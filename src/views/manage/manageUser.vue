@@ -1,14 +1,38 @@
 <template>
   <div class="animated fadeIn">
-    <b-row>
-      <b-col lg="12">
-        <c-table
-          :table-data="items"
-          :fields="fields"
-          caption="<i class='fa fa-align-justify'></i>จัดการผู้แจ้งซ่อม"
-        ></c-table>
+    <b-card>
+      <template>
+        <div style="float:right;padding-bottom:20px">
+          <b-button size="sm" variant="success" @click="insertData()">เพิ่มข้อมูลผู้แจ้งซ่อม</b-button>
+        </div>
+      </template>
+
+      <b-table
+        :items="datas"
+        :fields="fields"
+        striped
+        responsive="sm"
+        :table-variant="white"
+        :current-page="currentPage"
+        :per-page="perPage"
+        @filtered="onFiltered"
+      >
+        <template slot="actions" slot-scope="action">
+          <b-button size="sm" @click="updateData(action.item.email)">แก้ไข</b-button>
+          <b-button variant="danger" size="sm" @click="deleteData(action.item.email)">ลบ</b-button>
+        </template>
+      </b-table>
+      <b-col sm="7" md="6" class="my-1">
+        <b-pagination
+          :total-rows="totalRows"
+          :per-page="perPage"
+          v-model="currentPage"
+          prev-text="Prev"
+          next-text="Next"
+          hide-goto-end-buttons
+        />
       </b-col>
-    </b-row>
+    </b-card>
   </div>
 </template>
 
@@ -17,195 +41,62 @@ import { shuffleArray } from "@/shared/utils";
 import cTable from "../base/Table.vue";
 
 export default {
-  name: "manageUser",
-  components: { cTable },
   mounted() {
     this.token = localStorage.usertoken;
-    this.base_api = localStorage.getItem('base_api')
-    this.getData()
+    this.base_api = localStorage.getItem("base_api");
+    this.getData();
   },
-  methods : {
+  methods: {
     getData() {
-      this.$http.get(this.base_api + '/admin/users', {
-        headers: {
-          'Authorization': `Bearer ${this.token}`,
-          'Content-Type': 'application/json'
-        }
-      }).then((res) => {
-        this.datas = res.data.results.data[0]
-        console.log(this.datas)
-      })
+      this.$http
+        .get(this.base_api + "/admin/users", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => {
+          this.datas = res.data.results.data[0];
+          console.log(this.datas);
+        });
+    },
+    updateData(email) {
+      this.$router.push(`/updateProfile/${email}`);
+    },
+    async deleteData(email) {
+      console.log(this.token);
+      await this.$http
+        .delete(this.base_api + `/admin/users/${email}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => {
+          if (res.status === 200) {
+            this.$alertify.success("ลบข้อมูลเรียบร้อย");
+          }
+          this.getData();
+        });
+    },
+    insertData() {
+      this.$router.push(`/insertUser`);
     }
   },
+  components: { cTable },
   data: () => {
     return {
-      items: someData(),
-      itemsArray: someData,
+      datas: [],
       fields: [
-        { key: "username", label: "ลำดับ" },
-        { key: "role", label: "ชื่อรายการ" },
-        { key: "username", label: "ผู้แจ้ง", sortable: true },
-        { key: "registered", label: "วันที่แจ้ง" },
-        { key: "status", label: "สถานะ", sortable: true }
+        { key: "id_employee", label: "รหัสพนักงาน" },
+        { key: "email", label: "ชื่อผู้ใช้งาน" },
+        { key: "firstname", label: "ชื่อ" },
+        { key: "lastname", label: "นามสกุล" },
+        { key: "position", label: "ตำแหน่ง", sortable: true },
+        { key: "actions", label: "Actions" }
       ]
     };
   }
 };
-const someData = () =>
-  shuffleArray([
-    {
-      username: "Samppa Nori",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active",
-      _rowVariant: "success"
-    },
-    {
-      username: "Estavan Lykos",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned",
-      _rowVariant: "danger"
-    },
-    {
-      username: "Chetan Mohamed",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive",
-      _rowVariant: "info"
-    },
-    {
-      username: "Derick Maximinus",
-      registered: "2012/03/01",
-      role: "Member",
-      status: "Pending"
-    },
-    {
-      username: "Friderik Dávid",
-      registered: "2012/01/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Yiorgos Avraamu",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active"
-    },
-    {
-      username: "Avram Tarasios",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned"
-    },
-    {
-      username: "Quintin Ed",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive"
-    },
-    {
-      username: "Enéas Kwadwo",
-      registered: "2012/03/01",
-      role: "Member",
-      status: "Pending"
-    },
-    {
-      username: "Agapetus Tadeáš",
-      registered: "2012/01/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Carwyn Fachtna",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active"
-    },
-    {
-      username: "Nehemiah Tatius",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned"
-    },
-    {
-      username: "Ebbe Gemariah",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive"
-    },
-    {
-      username: "Eustorgios Amulius",
-      registered: "2012/03/01",
-      role: "Member",
-      status: "Pending"
-    },
-    {
-      username: "Leopold Gáspár",
-      registered: "2012/01/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Pompeius René",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active"
-    },
-    {
-      username: "Paĉjo Jadon",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned"
-    },
-    {
-      username: "Micheal Mercurius",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive"
-    },
-    {
-      username: "Ganesha Dubhghall",
-      registered: "2012/03/01",
-      role: "Member",
-      status: "Pending"
-    },
-    {
-      username: "Hiroto Šimun",
-      registered: "2012/01/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Vishnu Serghei",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Active"
-    },
-    {
-      username: "Zbyněk Phoibos",
-      registered: "2012/02/01",
-      role: "Staff",
-      status: "Banned"
-    },
-    {
-      username: "Einar Randall",
-      registered: "2012/02/01",
-      role: "Admin",
-      status: "Inactive"
-    },
-    {
-      username: "Félix Troels",
-      registered: "2012/03/21",
-      role: "Staff",
-      status: "Active"
-    },
-    {
-      username: "Aulus Agmundr",
-      registered: "2012/01/01",
-      role: "Member",
-      status: "Pending"
-    }
-  ]);
 </script>
 

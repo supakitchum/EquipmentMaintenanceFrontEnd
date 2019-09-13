@@ -19,8 +19,7 @@ Vue.use(VueAxios, axios)
     // todo
     // cssVars()
 Vue.use(BootstrapVue)
-Vue.use(VueAxios, axios)
-window.axios=require('axios')
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

@@ -17,11 +17,11 @@
                     </b-input-group-prepend>
                     <b-form-input
                       name="email"
-                      type="text"
+                      type="email"
                       class="form-control"
                       placeholder="Username"
                       autocomplete="username email"
-                      id="email"
+                      id="email" required
                     />
                   </b-input-group>
                   <b-input-group class="mb-4">
@@ -62,25 +62,29 @@ import { async } from "q";
 export default {
   mounted() {
     localStorage.removeItem("usertoken");
-    this.base_api = localStorage.base_api
+    this.base_api = localStorage.base_api;
   },
   name: "Login",
   methods: {
     Login: async function() {
       await this.axios({
         method: "post",
-        url: this.base_api+"/login",
+        url: this.base_api + "/login",
         data: { email: email.value, password: password.value },
         config: { headers: { "Content-Type": "application/json" } }
       })
         .then(resp => {
+          if (resp.status === 200){
           const token = resp.data.results.token;
           const type = resp.data.results.type;
           console.log(token);
           localStorage.setItem("usertoken", token); // store the token in localstorage
           localStorage.setItem("type", type); 
-          if (token != null) {
-            this.$router.push("/");
+            if (token != null) {
+              window.location.href = '/'
+            }
+          } else {
+            this.$alertify.error('ไม่พบข้อมูลของบัญชี');
           }
         })
         .catch(err => {
