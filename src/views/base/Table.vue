@@ -26,8 +26,8 @@
         :total-rows="totalRows"
         :per-page="perPage"
         v-model="currentPage"
-        prev-text="Prev"
-        next-text="Next"
+        prev-text="ย้อนกลับ"
+        next-text="ถัดไป"
         hide-goto-end-buttons
       />
     </nav>
@@ -98,14 +98,22 @@ export default {
     }
   },
   methods: {
-    getBadge (status) {
-      return status === 'Active' ? 'success'
-        : status === 'Inactive' ? 'secondary'
-          : status === 'Pending' ? 'warning'
-            : status === 'กำลังดำเนินการ' ? 'warning'
-                : status === 'รอดำเนินการ' ? 'secondary'
-                    : status === 'เสร็จสิ้น' ? 'success'
-                      : status === 'Banned' ? 'danger' : 'primary'
+    getBadge(status) {
+      return status === "Active"
+        ? "success"
+        : status === "Inactive"
+        ? "secondary"
+        : status === "Pending"
+        ? "warning"
+        : status === "กำลังดำเนินการ"
+        ? "warning"
+        : status === "รอดำเนินการ"
+        ? "secondary"
+        : status === "เสร็จสิ้น"
+        ? "success"
+        : status === "Banned"
+        ? "danger"
+        : "primary";
     },
     getRowCount: function() {
       return this.items.length;

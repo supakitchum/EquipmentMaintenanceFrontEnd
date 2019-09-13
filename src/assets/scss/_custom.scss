@@ -1,1 +1,93 @@
 // Here you can add other styles
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #01B901 !important;
+  border-color: #01B901 !important;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color:#01B901 ;
+  background-color: #fff;
+  border: 1px solid #c8ced3;
+}
+
+a {
+  color: #01B901;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  color: #fff;
+  background: #494f54;
+}
+
+// .sidebar .nav-link {
+//   color: #555454;
+// }
+
+.sidebar .nav-link.active {
+  color: #fff;
+  background: #01B901;
+}
+
+.sidebar .nav-link.active .nav-icon {
+  color: #fff;
+}
+
+.sidebar .nav-link:hover {
+  color: #fff;
+  background: #5CDB5C;
+}
+
+.sidebar .sidebar-minimizer {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar .nav-link .nav-icon {
+  color: #ffffff;
+}
+
+.sidebar .sidebar-minimizer:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-minimized .sidebar .sidebar-minimizer {
+  background-color: #353b40;
+}
+
+body {
+  font-family: 'Prompt', sans-serif;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #01B901;
+  border-color: #01B901;
+}
+
+.btn-link {
+  font-weight: 400;
+  color: #01B901;
+  text-decoration: none;
+}
+
+.form-control:focus {
+  border-color: #01B901;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color:  #01B901;
+  border-color:  #01B901;
+}

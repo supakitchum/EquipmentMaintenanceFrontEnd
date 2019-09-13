@@ -33,7 +33,7 @@ exports[`DefaultContainer.vue renders correctly 1`] = `
         alt="CoreUI Logo"
         class="navbar-brand-minimized"
         height="30"
-        src="img/brand/sygnet.svg"
+        src="img/logo-symbol.png"
         width="30"
       />
     </b-link-stub>
