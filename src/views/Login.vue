@@ -75,8 +75,10 @@ export default {
       })
         .then(resp => {
           const token = resp.data.results.token;
+          const type = resp.data.results.type;
           console.log(token);
           localStorage.setItem("usertoken", token); // store the token in localstorage
+          localStorage.setItem("type", type); 
           if (token != null) {
             this.$router.push("/");
           }
