@@ -6,7 +6,7 @@
         <div slot="header">อัพเดท</div>
           <b-table :items="datas" :fields="fields">
               <template slot="_id" slot-scope="data">
-                <b-button @click="$router.push({path: '/updatestatus',query: { id: data.item._id,title: data.item.title,detail: data.item.detail }})">{{ data.item._id }}</b-button>
+                <b-button @click="$router.push({path: '/updatestatus',query: { id: data.item._id,title: data.item.title,detail: data.item.detail }})">รายละเอียด</b-button>
               </template>
           </b-table>
         </b-card>
@@ -43,7 +43,7 @@ export default {
               this.datas[index].status = 'รอดำเนินการ'
             } else if (value.status == 2) {
               this.datas[index].status = 'กำลังดำเนินการ'
-            } 
+            }
           })
         })
       }
@@ -57,7 +57,7 @@ export default {
         {key: 'position_repair', label: 'สถานที่อยู่'},
         {key: 'create_date', label: 'วันที่แจ้ง'},
         {key: 'status', label: 'สถานะ', sortable: true},
-        {key: '_id', label: 'การกระทำ', sortable: true}
+        {key: '_id', label: 'อัพเดทงาน', sortable: true}
       ],
     }
   }

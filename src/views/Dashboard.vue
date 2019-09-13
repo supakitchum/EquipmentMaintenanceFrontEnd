@@ -98,7 +98,7 @@
           <nav>
             <b-pagination
               size="sm"
-              :total-rows="totalRows"
+              :total-rows="datas.count_repair1"
               :per-page="perPage"
               v-model="currentPage"
               prev-text="Prev"
@@ -153,9 +153,6 @@ export default {
           this.getData();
           this.getWork();
         });
-    },
-    getRowCount(data) {
-      return data.length;
     },
 
     async getData() {
@@ -234,7 +231,7 @@ export default {
       options: [],
       currentPage: 1,
       perPage: 10,
-      totalRows: 46
+      totalRows: 0
     };
   }
 };
