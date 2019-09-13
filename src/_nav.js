@@ -4,15 +4,6 @@ export default {
             url: '/dashboard',
             icon: 'icon-speedometer',
         },
-        // {
-        //     title: true,
-        //     name: 'Theme',
-        //     class: '',
-        //     wrapper: {
-        //         element: '',
-        //         attributes: {}
-        //     }
-        // },
         {
             name: 'จัดการผู้ใช้',
             url: '/manageuser',
