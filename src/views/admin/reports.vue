@@ -21,7 +21,7 @@
         <b-row>
           <b-col cols="10"></b-col>
           <b-col cols="2">
-            <router-link to="./excel_report" tag="button" class="btn btn-success">ออกรายงาน Excel</router-link>
+           <button type="button" v-on:click="onexport" tag="button" class="btn btn-success">ออกรายงาน Excel</button>
           </b-col>
         </b-row>
       </b-card-body>
@@ -31,7 +31,8 @@
 <script>
 import reportmonth from './ReportMonth'
 import { async } from 'q';
- import cTable from '../base/Table.vue'
+import cTable from '../base/Table.vue'
+import XLSX from 'xlsx'
 export default {
   components: {cTable},
 mounted() {
@@ -58,8 +59,19 @@ methods: {
           this.datas[index].create_date = value.create_date.slice(0,10)
           this.datas[index].update_date = value.update_date.slice(0,10)
         })
-     
+        this.excels = res.data.results.data[0]
+        this.excels.forEach((value, index) => {
+          this.excels[index].create_date = value.create_date.slice(0,10)
+          this.excels[index].update_date = value.update_date.slice(0,10)
+        })
       })
+    },
+    // excel export
+      onexport () {
+      var animalWS = XLSX.utils.json_to_sheet(this.excels)
+      var wb = XLSX.utils.book_new() 
+      XLSX.utils.book_append_sheet(wb, animalWS, this.excels) 
+      XLSX.writeFile(wb, 'book.xlsx') 
     }
   },
 data: function () {
