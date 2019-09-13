@@ -27,19 +27,11 @@
             label-for="basicSelect"
             :label-cols="3"
             id="status"
-            ><label for="name"><b>สถานะ</b></label>
-            <b-form-select id="basicSelect"
-              :plain="true"
-              :options="['กรุณาเลือกสถานะ','กำลังดำเนินการ', 'ดำเนินการเสร็จสิ้น']"
-              value="กรุณาเลือกสถานะ">
-            </b-form-select>
+            ><label for="name"><b>สถานะ</b>: กำลังดำเนินการ</label>
           </b-col>
                         <b-col md="12">
                             <b-button type="submit" size="dg" variant="success" style="margin:5px"><i
-                                    class="fa fa-dot-circle-o"></i> บันทึก
-                            </b-button>
-                            <b-button @click="$router.go(-1)" type="cancel" size="dg" variant="danger" style="margin:5px">
-                                    <i class="fa fa-ban"></i> ยกเลิก
+                                    class="fa fa-dot-circle-o"></i> ดำเนินการเสร็จสิ้น
                             </b-button>
                         </b-col>
                     </b-row>
@@ -50,8 +42,6 @@
 
 </template>
 <script>
-  import axios from 'axios'
-
   export default {
     name: "updatestatus",
     data: function () {
@@ -76,8 +66,11 @@
           }
         }).then((res) => {
           if (res.status === 200){
-            this.$alertify.success('บันทึกข้อมูลเรียบร้อย');
-            $router.push('/history')
+            this.$alertify.success('บันทึกข้อมูลเรียบร้อย')
+            this.$router.push('/updatefix')
+          }
+          else {
+            this.$alertify.error('บันทึกข้อมูลผิดพลาด')
           }
         })
       }
