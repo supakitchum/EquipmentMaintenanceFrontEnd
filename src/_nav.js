@@ -1,6 +1,6 @@
 export default {
     items: [{
-            name: 'แดชบอร์ด',
+            name: 'Dashboard',
             url: '/dashboard',
             icon: 'icon-speedometer',
         },
@@ -29,9 +29,9 @@ export default {
             icon: 'icon-calculator'
         },
         {
-        name: 'Report',
-        url: '/report',
-        icon: 'icon-pencil'
+          name: 'Report',
+          url: '/report',
+          icon: 'icon-calculator'
         },
         {
           name: 'โปรไฟล์',
