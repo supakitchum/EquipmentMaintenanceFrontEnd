@@ -23,7 +23,7 @@
                         </b-col>
                         <b-col md="6" class="mb-2">
                             <label for="name">ชื่อ</label>
-                            <b-form-input type="text" name="fname" id="fname"
+                            <b-form-input type="text" name="fname" id="fname" pattern="[A-Za-z]+"
                                           v-bind:value="(datas.firstname !== undefined) ? datas.firstname:''" required></b-form-input>
                         </b-col>
                         <b-col md="6" class="mb-2">
@@ -33,7 +33,7 @@
                         </b-col>
                         <b-col md="12" class="mb-2">
                             <label for="name">โทร</label>
-                            <b-form-input max-length="10" type="text" id="phone" name="phone"
+                            <b-form-input max-length="10" type="text" maxlength="10" id="phone" name="phone"
                                           v-bind:value="(datas.phone !== undefined) ? datas.phone:''" required></b-form-input>
                         </b-col>
                         <b-col md="12">
