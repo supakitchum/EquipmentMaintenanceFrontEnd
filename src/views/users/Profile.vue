@@ -80,7 +80,7 @@
         })
       },
       getData() {
-        this.$http.get(this.base_api + '/admin/users/test@test.com', {
+        this.$http.get(this.base_api + '/admin/users/test@test', {
           headers: {
             'Authorization': `Bearer ${this.token}`,
             'Content-Type': 'application/json'
