@@ -8,8 +8,10 @@
                 <div align="center" style="padding:10%">
                     <img src="https://avatarfiles.alphacoders.com/107/107749.png"
                          style="border-radius: 100%; width:300px; height:auto">
-                    <b-form-file id="file-small" size="sm" style="margin:15px"></b-form-file>
-
+                    <b-form @submit.prevent="uploadImage">
+                        <input type="file" id="file"  name="file" ref="file" size="sm" style="margin:15px">
+                        <button type="submit">Submit</button>
+                    </b-form>
                 </div>
 
             </b-col>
@@ -64,6 +66,19 @@
       this.getData()
     },
     methods: {
+      uploadImage() {
+        let fd= new FormData()
+
+        fd.append('image', this.file)
+        this.$http.post(this.base_api + '/upload',fd, {
+          headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then((res) => {
+          console.log(res)
+        })
+      },
       getData() {
         this.$http.get(this.base_api + '/admin/users/test@test.com', {
           headers: {
