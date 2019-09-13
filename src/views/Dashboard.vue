@@ -69,7 +69,7 @@
             :items="dataswork"
             :fields="fields"
             striped
-            responsive="lg"
+            responsive="sm"
             fixed="true"
             :current-page="currentPage"
             :per-page="perPage"
@@ -82,16 +82,37 @@
 
             <template v-slot:row-details="row">
               <b-card>
-                <b-form-group label="เลือกช่าง">
-                  <b-form-checkbox-group
-                    :options="options"
-                    v-model="selected"
-                    stacked
-                    buttons
-                    @input="insertTech(selected[0],row.item._id)"
-                    button-variant="info"
-                  ></b-form-checkbox-group>
-                </b-form-group>
+                <b-card>
+                  <b-table
+                    :items="options"
+                    :fields="fields1"
+                    striped
+                    responsive="sm"
+                    :current-page="currentPage1"
+                    :per-page="perPage1"
+                  >
+                    <template slot="actions" slot-scope="action">
+                      <b-button
+                        size="sm"
+                        @click="insertTech(action.item.email,row.item._id)"
+                        variant="primary"
+                      >ให้งานช่าง</b-button>
+                    </template>
+                  </b-table>
+                  <b-col sm="7" md="6" class="my-1">
+                    <nav>
+                      <b-pagination
+                        size="sm"
+                        :total-rows="options.length"
+                        :per-page="perPage1"
+                        v-model="currentPage1"
+                        prev-text="Prev"
+                        next-text="Next"
+                        hide-goto-end-buttons
+                      />
+                    </nav>
+                  </b-col>
+                </b-card>
               </b-card>
             </template>
           </b-table>
@@ -182,11 +203,6 @@ export default {
           this.dataswork.forEach((value, index) => {
             this.dataswork[index].index = index + 1;
             this.dataswork[index].create_date = value.create_date.slice(0, 10);
-            if (value.status == 1) {
-              this.dataswork[index].status = "รอดำเนินการ";
-            } else if (value.status == 2) {
-              this.dataswork[index].status = "กำลังดำเนินการ";
-            }
           });
           // console.log(this.datastech);
           this.datastech.forEach((value, index) => {
@@ -194,8 +210,9 @@ export default {
             const works = value.works.filter(value => {
               return value.status === "2";
             });
-            x.text = `${value.firstname} ${value.lastname} ${works.length}`;
-            x.value = value.email;
+            x.name = `${value.firstname} ${value.lastname} `;
+            x.num_works = `${works.length}`;
+            x.email = value.email;
             this.options[index] = x;
           });
           this.selected = [];
@@ -228,10 +245,17 @@ export default {
         { key: "create_date", label: "วันที่แจ้ง" },
         { key: "managework", label: "จัดการงานให้ช่าง" }
       ],
+      fields1: [
+        { key: "email", label: "email" },
+        { key: "name", label: "ชื่อ" },
+        { key: "num_works", label: "จำนวนงานปัจจุบัน", sortable: true },
+        { key: "actions", label: "จัดการงาน" }
+      ],
       options: [],
       currentPage: 1,
       perPage: 10,
-      totalRows: 0
+      currentPage1: 1,
+      perPage1: 10
     };
   }
 };
