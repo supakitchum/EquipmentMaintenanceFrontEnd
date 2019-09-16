@@ -5,6 +5,7 @@
         src="img/avatars/6.jpg"
         class="img-avatar"
         alt="admin@bootstrapmaster.com" />
+      <span>{{ email }}</span>
     </template>
     <template slot="dropdown">
       <b-dropdown-item :href="`#/users/profile`"><i class="fa fa-user" /> ข้อมูลส่วนตัว</b-dropdown-item>
@@ -30,11 +31,13 @@ export default {
     logout(){
       this.token = null;
       localStorage.type = null;
+      localStorage.email = null;
+      localStorage.new = null;
       window.location.href = '#/login'
     }
   },
   data: () => {
-    return { itemsCount: 42 }
+    return { email: localStorage.email }
   }
 }
 </script>

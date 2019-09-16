@@ -11,10 +11,10 @@ export default {
     if (!this.token) {
       this.$router.push("/login");
     } else {
-      if (localStorage.type == "user") {
-      this.$router.push("/users/repair");
-      } else if (localStorage.type == "technician") {
-      this.$router.push("/updatefix");
+      if (localStorage.type == "user" && localStorage.new != 1) {
+        this.$router.push("/users/repair");
+      } else if (localStorage.type == "technician" && localStorage.new != 1) {
+        this.$router.push("/updatefix");
       }
     }
   }
